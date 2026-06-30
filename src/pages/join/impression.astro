@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('section', 'impression');
+const data = entry?.data;
+const qa = data?.qa ?? [];
+---
+
+<BaseLayout title={data?.title} heading={data?.title} updated={data?.updated}>
+  <div class="grid gap-6 sm:grid-cols-2">
+    {
+      qa.map((item) => (
+        <div class="rounded border border-line p-4">
+          <p class="flex gap-2 text-sm">
+            <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-brand text-xs text-brand">
+              Q
+            </span>
+            <span class="font-medium">{item.q}</span>
+          </p>
+          <p class="mt-2 flex gap-2 text-sm">
+            <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-muted text-xs text-muted">
+              A
+            </span>
+            <span>{item.a}</span>
+          </p>
+        </div>
+      ))
+    }
+  </div>
+</BaseLayout>

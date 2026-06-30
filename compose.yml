@@ -1,0 +1,18 @@
+# 開発・ビルド用コンテナ。ローカルに Node を入れず、すべてここで実行する。
+#   開発サーバ : docker compose up        -> http://localhost:4321/lab-web
+#   ビルド     : docker compose run --rm app npm run build
+#   型チェック : docker compose run --rm app npm run check
+#   依存導入   : docker compose run --rm app npm install
+services:
+  app:
+    image: node:24-alpine
+    working_dir: /app
+    volumes:
+      - ./:/app
+      - node_modules:/app/node_modules
+    ports:
+      - "4321:4321"
+    command: npm run dev
+
+volumes:
+  node_modules:

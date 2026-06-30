@@ -1,0 +1,42 @@
+---
+import type { Page } from 'astro';
+import { useTranslations, getLangFromUrl } from '../i18n/utils';
+
+interface Props {
+  page: Page;
+}
+const { page } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// paginate() が生成する URL は base path を含む。
+const base = 'rounded border border-line px-3 py-1 text-sm';
+const disabled = `${base} cursor-default text-line`;
+const active = `${base} text-brand hover:bg-surface`;
+---
+
+{
+  page.lastPage > 1 && (
+    <nav class="mt-8 flex items-center justify-center gap-4" aria-label="ページ送り">
+      {page.url.prev ? (
+        <a href={page.url.prev} class={active} rel="prev">
+          ← {t('news.prev')}
+        </a>
+      ) : (
+        <span class={disabled}>← {t('news.prev')}</span>
+      )}
+
+      <span class="text-sm text-muted">
+        {page.currentPage} / {page.lastPage}
+      </span>
+
+      {page.url.next ? (
+        <a href={page.url.next} class={active} rel="next">
+          {t('news.next')} →
+        </a>
+      ) : (
+        <span class={disabled}>{t('news.next')} →</span>
+      )}
+    </nav>
+  )
+}

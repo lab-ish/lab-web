@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NewsList from '../components/NewsList.astro';
+import { getCollection, getEntry } from 'astro:content';
+import { href } from '../lib/url';
+import { useTranslations, getLangFromUrl } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const allNews = (await getCollection('news')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+const latestNews = allNews.slice(0, 3);
+
+const links = await getEntry('section', 'links');
+const contact = await getEntry('section', 'contact');
+---
+
+<BaseLayout>
+  {/* ヒーロー（写真プレースホルダ） */}
+  <section class="mb-12">
+    <div
+      class="flex aspect-[16/7] w-full items-center justify-center rounded bg-line text-muted"
+    >
+      写真
+    </div>
+  </section>
+
+  {/* ニュース（最新3件） */}
+  <section class="mb-12">
+    <h2 class="mb-4 text-xl font-bold text-brand">{t('home.news')}</h2>
+    <NewsList items={latestNews} />
+    <div class="mt-4 text-right">
+      <a href={href('/news')} class="text-sm text-brand-light underline"
+        >{t('news.all')} →</a
+      >
+    </div>
+  </section>
+
+  {/* 関連サイト */}
+  <section class="mb-12">
+    <h2 class="mb-4 text-xl font-bold text-brand">{t('home.links')}</h2>
+    <ul class="list-inside list-disc space-y-1 text-sm">
+      {
+        links?.data.links?.map((l) => (
+          <li>
+            <a href={l.url} class="text-brand-light underline" target="_blank" rel="noopener">
+              {l.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  {/* コンタクト */}
+  <section>
+    <h2 class="mb-4 text-xl font-bold text-brand">{t('home.contact')}</h2>
+    <ul class="space-y-1 text-sm">
+      {
+        contact?.data.contacts?.map((c) => (
+          <li class="flex gap-4">
+            <span class="w-24 shrink-0">{c.name}</span>
+            <a href={`mailto:${c.email}`} class="text-brand-light underline">
+              {c.email}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

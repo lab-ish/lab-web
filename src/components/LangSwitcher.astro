@@ -1,0 +1,24 @@
+---
+import { languages, defaultLang } from '../i18n/ui';
+import { getLangFromUrl } from '../i18n/utils';
+
+// 言語切替。多言語拡張の枠として設置する。
+// 現状は日本語のみ実装のため、英語は「準備中」表示（リンクは無効）。
+const current = getLangFromUrl(Astro.url);
+---
+
+<div class="flex items-center gap-2 text-xs">
+  {
+    (Object.keys(languages) as (keyof typeof languages)[]).map((lng) => (
+      <span
+        class:list={[
+          'px-1',
+          lng === current ? 'font-semibold text-brand' : 'text-line',
+        ]}
+        title={lng === defaultLang ? undefined : '準備中'}
+      >
+        {languages[lng]}
+      </span>
+    ))
+  }
+</div>

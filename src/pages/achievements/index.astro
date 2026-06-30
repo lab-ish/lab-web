@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { href } from '../../lib/url';
+import { useTranslations, getLangFromUrl } from '../../i18n/utils';
+import { getPublicationSections, getAwards } from '../../lib/achievements';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const pubCount = getPublicationSections().reduce((n, s) => n + s.items.length, 0);
+const awardCount = getAwards().length;
+
+const cards = [
+  {
+    label: t('achievements.publications'),
+    desc: `論文 ${pubCount} 件（種別別）`,
+    href: href('/achievements/publications'),
+  },
+  {
+    label: t('achievements.awards'),
+    desc: `受賞 ${awardCount} 件（時系列）`,
+    href: href('/achievements/awards'),
+  },
+];
+---
+
+<BaseLayout title="研究成果" heading="研究成果">
+  <div class="grid gap-6 sm:grid-cols-2">
+    {
+      cards.map((c) => (
+        <a
+          href={c.href}
+          class="block rounded border border-line p-6 hover:border-brand hover:bg-surface"
+        >
+          <h2 class="text-lg font-bold text-brand">{c.label}</h2>
+          <p class="mt-1 text-sm text-muted">{c.desc}</p>
+        </a>
+      ))
+    }
+  </div>
+</BaseLayout>

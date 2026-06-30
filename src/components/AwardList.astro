@@ -1,0 +1,38 @@
+---
+import type { DatedAward } from '../lib/achievements';
+import { useTranslations, getLangFromUrl } from '../i18n/utils';
+
+interface Props {
+  awards: DatedAward[];
+}
+const { awards } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const fmt = (d: Date) =>
+  isNaN(d.getTime())
+    ? ''
+    : `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, '0')}`;
+const yearOf = (d: Date) => (isNaN(d.getTime()) ? undefined : d.getFullYear());
+---
+
+<section data-count-group>
+  <p class="mb-3 text-sm text-muted">
+    (<span class="js-count">{awards.length}</span> {t('achievements.count')})
+  </p>
+  <ol class="list-decimal divide-y divide-line pl-6">
+    {
+      awards.map((a) => (
+        <li class="py-3" data-year={yearOf(a.parsedDate)}>
+          <div class="flex flex-col gap-1 sm:flex-row sm:gap-4">
+            <span class="shrink-0 text-sm text-muted sm:w-20">{fmt(a.parsedDate)}</span>
+            <span class="text-sm">
+              <span class="font-medium">{a.award}</span>
+              <span class="ml-1 text-muted">（{a.author}）</span>
+            </span>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</section>

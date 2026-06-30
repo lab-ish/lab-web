@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MemberCard from '../../components/MemberCard.astro';
+import { getCollection } from 'astro:content';
+import { href } from '../../lib/url';
+import { useTranslations, getLangFromUrl } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// 表示する年度（暫定。実データ投入時に最新年度へ）。
+const year = 2024;
+const members = (await getCollection('members')).filter((m) => m.data.year === year);
+
+const grades = [
+  { key: 'faculty', label: t('members.faculty') },
+  { key: 'd', label: t('members.d') },
+  { key: 'm2', label: t('members.m2') },
+  { key: 'm1', label: t('members.m1') },
+  { key: 'b4', label: t('members.b4') },
+] as const;
+
+const byGrade = (grade: string) =>
+  members
+    .filter((m) => m.data.grade === grade)
+    .sort((a, b) => a.data.order - b.data.order);
+
+// 更新日は最新メンバーの想定だが、ここでは固定の年度見出しのみ。
+---
+
+<BaseLayout title={t('members.heading')} heading={`${t('members.heading')}(${year}年度）`}>
+  <p class="mb-6">
+    <a href={href('/members/alumni')} class="text-sm text-brand-light underline">
+      {t('members.toAlumni')} →
+    </a>
+  </p>
+  <div class="space-y-10">
+    {
+      grades.map((g) => {
+        const list = byGrade(g.key);
+        return (
+          list.length > 0 && (
+            <section>
+              <h2 class="mb-4 border-b border-line pb-1 text-lg text-ink">{g.label}</h2>
+              <div class="flex flex-wrap gap-6">
+                {list.map((m) => (
+                  <MemberCard member={m} />
+                ))}
+              </div>
+            </section>
+          )
+        );
+      })
+    }
+  </div>
+</BaseLayout>

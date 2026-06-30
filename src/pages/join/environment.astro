@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('section', 'environment');
+const data = entry?.data;
+const cards = data?.cards ?? [];
+---
+
+<BaseLayout title={data?.title} heading={data?.title} updated={data?.updated}>
+  <div class="grid gap-6 sm:grid-cols-2">
+    {
+      cards.map((c) => (
+        <article>
+          <div class="mb-2 flex aspect-[16/10] items-center justify-center rounded bg-line text-xs text-muted">
+            画像
+          </div>
+          <h2 class="text-center text-sm font-medium">{c.title}</h2>
+          {c.body && <p class="mt-1 text-center text-xs text-muted">{c.body}</p>}
+        </article>
+      ))
+    }
+  </div>
+</BaseLayout>

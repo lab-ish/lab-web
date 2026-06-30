@@ -1,0 +1,49 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NewsList from '../../components/NewsList.astro';
+import Pagination from '../../components/Pagination.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { href } from '../../lib/url';
+import { useTranslations, getLangFromUrl } from '../../i18n/utils';
+
+// 全ニュースを新しい順にページ送り（/news, /news/2, ...）。年が増えても対応可能。
+export const getStaticPaths = (async ({ paginate }) => {
+  const news = (await getCollection('news')).sort(
+    (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+  );
+  return paginate(news, { pageSize: 5 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props as { page: Page<CollectionEntry<'news'>> };
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// 表示中ページを年ごとに束ねて見出しを付ける。
+const groups = new Map<number, CollectionEntry<'news'>[]>();
+for (const item of page.data) {
+  const y = item.data.date.getFullYear();
+  if (!groups.has(y)) groups.set(y, []);
+  groups.get(y)!.push(item);
+}
+const years = [...groups.keys()].sort((a, b) => b - a);
+---
+
+<BaseLayout title={t('news.all')} heading={t('news.all')}>
+  <div class="space-y-8">
+    {
+      years.map((y) => (
+        <section>
+          <h2 class="mb-2 text-lg font-bold text-brand">
+            <a href={href(`/news/year/${y}`)} class="hover:underline">
+              {y}
+            </a>
+          </h2>
+          <NewsList items={groups.get(y)!} />
+        </section>
+      ))
+    }
+  </div>
+
+  <Pagination page={page} />
+</BaseLayout>

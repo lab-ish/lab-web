@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getAlumni, type Degree } from '../../lib/alumni';
+import { href } from '../../lib/url';
+import { useTranslations, getLangFromUrl } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const groups = getAlumni();
+
+const degreeLabel = (d: Degree) =>
+  d === 'doctor'
+    ? t('members.degreeD')
+    : d === 'master'
+      ? t('members.degreeM')
+      : t('members.degreeB');
+---
+
+<BaseLayout title={t('members.alumni')} heading={t('members.alumni')}>
+  <p class="mb-6">
+    <a href={href('/members')} class="text-sm text-brand-light underline">
+      ← {t('members.toCurrent')}
+    </a>
+  </p>
+  <div class="space-y-10">
+    {
+      groups.map((g) => (
+        <section>
+          <h2 class="mb-4 border-b border-line pb-1 text-lg text-ink">{g.year}年度</h2>
+          <ul class="space-y-2">
+            {g.members.map((m) => (
+              <li class="text-sm">
+                <span>{m.name}</span>
+                <span class="ml-2 text-xs text-muted">{degreeLabel(m.degree)}</span>
+                {m.note && <span class="ml-2 text-xs text-muted">／ {m.note}</span>}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+</BaseLayout>

@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PublicationList from '../../components/PublicationList.astro';
+import YearFilter from '../../components/YearFilter.astro';
+import { getPublicationSections, getPublicationYears } from '../../lib/achievements';
+import { useTranslations, getLangFromUrl } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const sections = getPublicationSections();
+const years = getPublicationYears();
+---
+
+<BaseLayout title={t('achievements.publications')} heading={t('achievements.publications')}>
+  <YearFilter years={years} />
+  <PublicationList sections={sections} />
+</BaseLayout>

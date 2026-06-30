@@ -1,0 +1,45 @@
+---
+// 研究成果の年フィルタ（論文・受賞で共用）。
+// ページ最上部に年セレクトを置き、クライアントJSで [data-year] 要素の表示を切替える。
+// 各 [data-count-group] 内の可視件数を数えて .js-count に書き込み、件数を動的更新する。
+// 番号は <ol> のネイティブ連番が hidden 項目を自動スキップするため、別途処理は不要。
+import { useTranslations, getLangFromUrl } from '../i18n/utils';
+
+interface Props {
+  years: number[]; // 降順のユニーク年配列
+}
+const { years } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<div class="mb-6 flex items-center gap-2">
+  <label for="year-filter" class="text-sm text-muted">{t('achievements.filterByYear')}</label>
+  <select
+    id="year-filter"
+    class="js-year-filter rounded border border-line px-2 py-1 text-sm"
+  >
+    <option value="all">{t('achievements.allYears')}</option>
+    {years.map((y) => <option value={y}>{y}</option>)}
+  </select>
+</div>
+
+<script>
+  const select = document.querySelector<HTMLSelectElement>('.js-year-filter');
+
+  function apply() {
+    if (!select) return;
+    const v = select.value;
+    document.querySelectorAll<HTMLElement>('[data-year]').forEach((el) => {
+      el.hidden = v !== 'all' && el.dataset.year !== v;
+    });
+    document.querySelectorAll<HTMLElement>('[data-count-group]').forEach((group) => {
+      const n = group.querySelectorAll('[data-year]:not([hidden])').length;
+      const count = group.querySelector('.js-count');
+      if (count) count.textContent = String(n);
+    });
+  }
+
+  select?.addEventListener('change', apply);
+  apply();
+</script>

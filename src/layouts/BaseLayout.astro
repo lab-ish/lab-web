@@ -1,0 +1,66 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import { href } from '../lib/url';
+import { useTranslations, getLangFromUrl } from '../i18n/utils';
+
+interface Props {
+  title?: string; // <title> 用。未指定ならサイト名
+  heading?: string; // ページ見出しバンド（未指定なら非表示＝トップ用）
+  updated?: Date; // 「yyyy/mm/dd 更新」
+  description?: string;
+}
+
+const { title, heading, updated, description } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const siteTitle = t('site.title');
+const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
+
+const fmt = (d: Date) =>
+  `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, '0')}/${String(
+    d.getDate(),
+  ).padStart(2, '0')}`;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href={href('/favicon.svg')} />
+    <title>{pageTitle}</title>
+    {description && <meta name="description" content={description} />}
+  </head>
+  <body class="flex min-h-screen flex-col bg-white">
+    <header>
+      <Nav />
+    </header>
+
+    {
+      heading && (
+        <div class="border-b border-line">
+          <div class="mx-auto flex max-w-5xl items-baseline justify-center px-4 py-6">
+            <h1 class="text-center text-2xl font-bold text-ink">{heading}</h1>
+            {updated && (
+              <p class="ml-4 shrink-0 text-xs text-muted">
+                {fmt(updated)} {t('common.updated')}
+              </p>
+            )}
+          </div>
+        </div>
+      )
+    }
+
+    <main class="mx-auto w-full max-w-5xl flex-1 px-4 py-8">
+      <slot />
+    </main>
+
+    <footer class="border-t border-line bg-surface">
+      <div class="mx-auto max-w-5xl px-4 py-6 text-center text-xs text-muted">
+        © {new Date().getFullYear()} {siteTitle}
+      </div>
+    </footer>
+  </body>
+</html>

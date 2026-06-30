@@ -1,0 +1,42 @@
+# GitHub Pages へのビルド・デプロイ。
+# リポジトリのルート（= この 20_src の中身）に package.json がある前提。
+# 公式の withastro/action を使う。Node は開発環境（node:24-alpine）に合わせて 24 を指定。
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同時実行を1本に制限（進行中のデプロイは止めない）
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build with Astro
+        uses: withastro/action@v3
+        with:
+          node-version: 24
+          # path: .   # リポジトリルートに astro プロジェクトがあるため既定（.）でよい
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

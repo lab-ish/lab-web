@@ -1,0 +1,58 @@
+---
+import type { PublicationSection } from '../lib/achievements';
+import { href } from '../lib/url';
+import { useTranslations, getLangFromUrl } from '../i18n/utils';
+
+interface Props {
+  sections: PublicationSection[];
+}
+const { sections } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<div class="space-y-10">
+  {
+    sections.map((section) => (
+      <section data-count-group>
+        <h2 class="mb-3 border-b border-line pb-1 text-lg font-bold text-brand">
+          {section.title} (<span class="js-count">{section.items.length}</span> {t('achievements.count')})
+        </h2>
+        <ol class="list-decimal space-y-3 pl-6">
+          {section.items.map((item) => (
+            <li class="text-sm leading-relaxed" data-year={item.year}>
+              {item.emph && (
+                <span class="mr-1 rounded bg-brand px-1.5 py-0.5 text-xs text-white">
+                  {item.emph}
+                </span>
+              )}
+              <span>{item.authors}, </span>
+              <span class="font-medium">“{item.title},” </span>
+              <span class="italic">{item.in}</span>
+              {item.vol_pp && <span>, {item.vol_pp}</span>}
+              <span>, {item.month}/{item.year}.</span>
+              {item.note && <span class="ml-1 text-xs text-muted">({item.note})</span>}
+              <span class="ml-1 inline-flex flex-wrap gap-2 align-baseline">
+                {item.url && (
+                  <a href={item.url} class="text-brand-light underline" target="_blank" rel="noopener">
+                    DOI
+                  </a>
+                )}
+                {item.pdf && (
+                  <a href={href(`/pdf/${item.pdf}.pdf`)} class="text-brand-light underline">
+                    PDF
+                  </a>
+                )}
+                {item.slide && (
+                  <a href={item.slide} class="text-brand-light underline" target="_blank" rel="noopener">
+                    Slides
+                  </a>
+                )}
+              </span>
+            </li>
+          ))}
+        </ol>
+      </section>
+    ))
+  }
+</div>

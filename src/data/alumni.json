@@ -1,0 +1,8 @@
+[
+  { "year": 2023, "degree": "doctor", "name": "佐藤 健一", "note": "大学教員" },
+  { "year": 2023, "degree": "master", "name": "鈴木 美咲", "note": "IT企業" },
+  { "year": 2023, "degree": "master", "name": "高橋 直樹", "note": null },
+  { "year": 2023, "degree": "bachelor", "name": "田中 優子", "note": null },
+  { "year": 2022, "degree": "master", "name": "伊藤 翔太", "note": "通信会社" },
+  { "year": 2022, "degree": "bachelor", "name": "渡辺 彩花", "note": "大学院進学" }
+]

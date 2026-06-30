@@ -1,0 +1,39 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import NewsList from '../../../components/NewsList.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { href } from '../../../lib/url';
+import { useTranslations, getLangFromUrl } from '../../../i18n/utils';
+
+// 年ごとのアーカイブ（/news/year/2024 など）。/news/[id] との衝突を避けるため year/ 配下に置く。
+export const getStaticPaths = (async () => {
+  const news = await getCollection('news');
+  const years = [...new Set(news.map((n) => n.data.date.getFullYear()))];
+  return years.map((year) => ({
+    params: { year: String(year) },
+    props: {
+      year,
+      items: news
+        .filter((n) => n.data.date.getFullYear() === year)
+        .sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+const { year, items } = Astro.props as {
+  year: number;
+  items: CollectionEntry<'news'>[];
+};
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<BaseLayout title={`${year} ${t('news.all')}`} heading={`${year}`}>
+  <NewsList items={items} />
+  <div class="mt-8">
+    <a href={href('/news')} class="text-sm text-brand-light underline">
+      ← {t('common.backToNews')}
+    </a>
+  </div>
+</BaseLayout>

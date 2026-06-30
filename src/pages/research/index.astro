@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('section', 'research');
+const data = entry?.data;
+
+// 研究紹介カードを group（稲村研／石田研）ごとに束ねる。
+const cards = data?.cards ?? [];
+const groups = [...new Set(cards.map((c) => c.group ?? ''))];
+---
+
+<BaseLayout title={data?.title} heading={data?.title} updated={data?.updated}>
+  {/* 研究概要 */}
+  <section class="mb-12">
+    <h2 class="mb-4 border-b border-line pb-1 text-lg text-ink">研究概要</h2>
+    <div class="space-y-4">
+      {
+        data?.sections?.map((s) => (
+          <div>
+            {s.heading && <h3 class="font-semibold text-brand">{s.heading}</h3>}
+            <p class="text-sm">{s.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  {/* 研究紹介 */}
+  <section>
+    <h2 class="mb-4 border-b border-line pb-1 text-lg text-ink">研究紹介</h2>
+    <div class="space-y-8">
+      {
+        groups.map((g) => (
+          <div>
+            {g && <h3 class="mb-3 font-semibold text-brand">{g}</h3>}
+            <div class="grid gap-6 sm:grid-cols-3">
+              {cards
+                .filter((c) => (c.group ?? '') === g)
+                .map((c) => (
+                  <article>
+                    <div class="mb-2 flex aspect-[4/3] items-center justify-center rounded bg-line text-xs text-muted">
+                      画像
+                    </div>
+                    <h4 class="text-sm font-medium">{c.title}</h4>
+                    {c.body && <p class="text-xs text-muted">{c.body}</p>}
+                  </article>
+                ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

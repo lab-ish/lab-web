@@ -1,0 +1,90 @@
+---
+import { href } from '../lib/url';
+import { useTranslations, getLangFromUrl } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const items = [
+  { label: t('nav.members'), href: href('/members') },
+  { label: t('nav.research'), href: href('/research') },
+  {
+    label: t('nav.join'),
+    href: href('/join'),
+    children: [
+      { label: t('nav.environment'), href: href('/join/environment') },
+      { label: t('nav.labLife'), href: href('/join/lab-life') },
+      { label: t('nav.impression'), href: href('/join/impression') },
+    ],
+  },
+  { label: t('nav.achievements'), href: href('/achievements') },
+];
+
+// 現在ページのハイライト判定用（base を除いたパスで比較）
+const current = Astro.url.pathname;
+const isActive = (target: string) =>
+  current === target || (target !== href('/') && current.startsWith(target));
+---
+
+<nav class="border-b border-line bg-white" aria-label="メインメニュー">
+  <div class="relative mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
+    <a href={href('/')} class="text-lg font-bold text-brand">
+      {t('site.title')}
+    </a>
+
+    <!-- モバイル用ハンバーガー -->
+    <button
+      type="button"
+      class="nav-toggle inline-flex h-9 w-9 items-center justify-center rounded md:hidden"
+      aria-label={t('nav.menu')}
+      aria-expanded="false"
+    >
+      <span class="block h-0.5 w-5 bg-ink before:block before:h-0.5 before:w-5 before:-translate-y-1.5 before:bg-ink after:block after:h-0.5 after:w-5 after:translate-y-1 after:bg-ink"></span>
+    </button>
+
+    <!-- メニュー本体 -->
+    <ul
+      class="nav-menu absolute left-0 right-0 top-full z-20 hidden border-b border-line bg-white px-4 py-2 md:static md:z-auto md:flex md:flex-row md:items-center md:gap-6 md:border-0 md:px-0 md:py-0"
+    >
+      {
+        items.map((item) => (
+          <li class={item.children ? 'group relative' : ''}>
+            <a
+              href={item.href}
+              class:list={[
+                'block py-2 text-sm hover:text-brand md:py-0',
+                isActive(item.href) ? 'text-brand font-semibold' : 'text-ink',
+              ]}
+            >
+              {item.label}
+            </a>
+            {item.children && (
+              <ul class="md:absolute md:left-0 md:top-full md:hidden md:min-w-44 md:border md:border-line md:bg-white md:shadow-md md:group-hover:block md:group-focus-within:block">
+                {item.children.map((child) => (
+                  <li>
+                    <a
+                      href={child.href}
+                      class="block py-1 pl-4 text-sm text-muted hover:text-brand md:px-4 md:py-2"
+                    >
+                      {child.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</nav>
+
+<script>
+  // モバイルのハンバーガー開閉。デスクトップ(md+)では常時表示のため不要。
+  const toggle = document.querySelector('.nav-toggle');
+  const menu = document.querySelector('.nav-menu');
+  toggle?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('hidden') === false;
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+</script>

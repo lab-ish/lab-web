@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AwardList from '../../components/AwardList.astro';
+import YearFilter from '../../components/YearFilter.astro';
+import { getAwards, getAwardYears } from '../../lib/achievements';
+import { useTranslations, getLangFromUrl } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const awards = getAwards();
+const years = getAwardYears();
+---
+
+<BaseLayout title={t('achievements.awards')} heading={t('achievements.awards')}>
+  <YearFilter years={years} />
+  <AwardList awards={awards} />
+</BaseLayout>

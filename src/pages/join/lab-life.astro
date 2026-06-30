@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('section', 'lab-life');
+const data = entry?.data;
+const schedule = data?.schedule ?? [];
+---
+
+<BaseLayout title={data?.title} heading={data?.title} updated={data?.updated}>
+  <div class="space-y-6">
+    {
+      schedule.map((s) => (
+        <div>
+          <h2 class="font-semibold text-brand">{s.month}</h2>
+          <p class="text-sm">{s.body}</p>
+        </div>
+      ))
+    }
+  </div>
+</BaseLayout>
