@@ -9,7 +9,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 // 表示する年度（暫定。実データ投入時に最新年度へ）。
-const year = 2024;
+const year = 2026;
 const members = (await getCollection('members')).filter((m) => m.data.year === year);
 
 const grades = [

@@ -1,12 +1,10 @@
 ---
 title: 関連サイト
-updated: 2026-06-30
+updated: 2026-07-01
 lang: ja
 links:
   - label: 公立はこだて未来大学
     url: https://www.fun.ac.jp/
-  - label: （ダミー）システム情報科学部
-    url: https://www.fun.ac.jp/
+  - label: Shigemi ISHIDA's Portfolio
+    url: https://pman0214.netlify.app/
 ---
-
-（ダミー）関連サイトページの本文。大学・学部・関連団体へのリンクを掲載する。
