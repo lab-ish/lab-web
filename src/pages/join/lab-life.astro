@@ -1,13 +1,21 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getEntry } from 'astro:content';
+import { getEntry, render } from 'astro:content';
 
 const entry = await getEntry('section', 'lab-life');
 const data = entry?.data;
 const schedule = data?.schedule ?? [];
+const { Content } = entry ? await render(entry) : { Content: null };
 ---
 
 <BaseLayout title={data?.title} heading={data?.title} updated={data?.updated}>
+  {
+    Content && (
+      <div class="mb-8 text-sm leading-relaxed [&_p]:mb-4">
+        <Content />
+      </div>
+    )
+  }
   <div class="space-y-6">
     {
       schedule.map((s) => (

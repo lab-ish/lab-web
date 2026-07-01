@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getEntry } from 'astro:content';
+import { getEntry, render } from 'astro:content';
 import { href } from '../../lib/url';
 import { useTranslations, getLangFromUrl } from '../../i18n/utils';
 
@@ -9,6 +9,7 @@ const t = useTranslations(lang);
 
 const entry = await getEntry('section', 'join');
 const data = entry?.data;
+const { Content } = entry ? await render(entry) : { Content: null };
 
 const subPages = [
   { label: t('nav.environment'), href: href('/join/environment') },
@@ -20,6 +21,13 @@ const subPages = [
 <BaseLayout title={data?.title} heading={data?.title} updated={data?.updated}>
   <section class="mb-10 space-y-4">
     {data?.sections?.map((s) => <p class="text-sm">{s.body}</p>)}
+    {
+      Content && (
+        <div class="text-sm leading-relaxed [&_p]:mb-4">
+          <Content />
+        </div>
+      )
+    }
   </section>
 
   <section class="grid gap-6 sm:grid-cols-3">

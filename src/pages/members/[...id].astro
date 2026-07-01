@@ -1,0 +1,52 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import { href } from '../../lib/url';
+import { useTranslations, getLangFromUrl } from '../../i18n/utils';
+
+// 本文（Markdown）を持つメンバーのみ個別ページを生成する。
+export const getStaticPaths = (async () => {
+  const members = await getCollection('members');
+  return members
+    .filter((entry) => (entry.body ?? '').trim().length > 0)
+    .map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props as { entry: CollectionEntry<'members'> };
+const { Content } = await render(entry);
+const { name, role, photo } = entry.data;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<BaseLayout title={name} heading={name}>
+  <article>
+    <div class="mb-6 flex items-center gap-4">
+      {
+        photo ? (
+          <Image
+            src={photo}
+            alt={name}
+            width={96}
+            height={96}
+            class="h-24 w-24 rounded-full object-cover"
+          />
+        ) : (
+          <div class="h-24 w-24 rounded-full bg-line" aria-hidden="true"></div>
+        )
+      }
+      {role && <p class="text-sm text-muted">{role}</p>}
+    </div>
+    <div class="text-sm leading-relaxed [&_h2]:mt-6 [&_h2]:mb-2 [&_h2]:font-semibold [&_h2]:text-brand [&_p]:mb-4 [&_ul]:list-disc [&_ul]:pl-5">
+      <Content />
+    </div>
+  </article>
+
+  <div class="mt-10">
+    <a href={href('/members')} class="text-sm text-brand-light underline">
+      ← {t('members.heading')}
+    </a>
+  </div>
+</BaseLayout>

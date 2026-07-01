@@ -1,12 +1,15 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getEntry } from 'astro:content';
+import { getEntry, getCollection } from 'astro:content';
 
 const entry = await getEntry('section', 'research');
 const data = entry?.data;
 
-// 研究紹介カードを group（稲村研／石田研）ごとに束ねる。
-const cards = data?.cards ?? [];
+// 研究紹介カードは collection（1カード = 1ファイル）から取得し、
+// group（稲村研／石田研）ごとに束ねて order 順に並べる。
+const cards = (await getCollection('research'))
+  .map((c) => c.data)
+  .sort((a, b) => a.order - b.order);
 const groups = [...new Set(cards.map((c) => c.group ?? ''))];
 ---
 

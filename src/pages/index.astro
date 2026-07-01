@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import NewsList from '../components/NewsList.astro';
-import { getCollection, getEntry } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 import { href } from '../lib/url';
 import { useTranslations, getLangFromUrl } from '../i18n/utils';
 
@@ -15,6 +15,11 @@ const latestNews = allNews.slice(0, 3);
 
 const links = await getEntry('section', 'links');
 const contact = await getEntry('section', 'contact');
+
+// 研究室紹介・コンタクトの本文（Markdown）を描画する。
+const home = await getEntry('section', 'home');
+const { Content: HomeBody } = home ? await render(home) : { Content: null };
+const { Content: ContactBody } = contact ? await render(contact) : { Content: null };
 ---
 
 <BaseLayout>
@@ -26,6 +31,17 @@ const contact = await getEntry('section', 'contact');
       写真
     </div>
   </section>
+
+  {/* 研究室紹介 */}
+  {
+    HomeBody && (
+      <section class="mb-12">
+        <div class="text-sm leading-relaxed [&_p]:mb-4">
+          <HomeBody />
+        </div>
+      </section>
+    )
+  }
 
   {/* ニュース（最新3件） */}
   <section class="mb-12">
@@ -57,6 +73,13 @@ const contact = await getEntry('section', 'contact');
   {/* コンタクト */}
   <section>
     <h2 class="mb-4 text-xl font-bold text-brand">{t('home.contact')}</h2>
+    {
+      ContactBody && (
+        <div class="mb-4 text-sm leading-relaxed [&_p]:mb-4">
+          <ContactBody />
+        </div>
+      )
+    }
     <ul class="space-y-1 text-sm">
       {
         contact?.data.contacts?.map((c) => (

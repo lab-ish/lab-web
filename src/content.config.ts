@@ -73,4 +73,18 @@ const news = defineCollection({
   }),
 });
 
-export const collections = { section, members, news };
+// 研究紹介カード（1カード = 1ファイル）。group で見出しごとに束ね、order で並べる。
+const research = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/research' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      group: z.string().optional(), // 稲村研／石田研
+      order: z.number().default(99), // group 内の表示順
+      image: image().optional(),
+      body: z.string().optional(), // カードの短い説明
+      lang: z.enum(['ja', 'en']).default('ja'),
+    }),
+});
+
+export const collections = { section, members, news, research };

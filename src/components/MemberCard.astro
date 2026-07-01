@@ -1,30 +1,43 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
+import { href } from '../lib/url';
 
 interface Props {
   member: CollectionEntry<'members'>;
 }
 const { member } = Astro.props;
 const { name, role, photo } = member.data;
+
+// 本文（Markdown）を持つメンバーのみ個別ページへリンクする。
+const hasPage = (member.body ?? '').trim().length > 0;
+const Tag = hasPage ? 'a' : 'div';
 ---
 
 <figure class="flex w-24 flex-col items-center gap-2">
-  {
-    photo ? (
-      <Image
-        src={photo}
-        alt={name}
-        width={80}
-        height={80}
-        class="h-20 w-20 rounded-full object-cover"
-      />
-    ) : (
-      <div class="h-20 w-20 rounded-full bg-line" aria-hidden="true"></div>
-    )
-  }
-  <figcaption class="text-center text-sm">
-    <span class="block">{name}</span>
-    {role && <span class="block text-xs text-muted">{role}</span>}
-  </figcaption>
+  <Tag
+    href={hasPage ? href(`/members/${member.id}`) : undefined}
+    class:list={[
+      'flex flex-col items-center gap-2',
+      hasPage && 'hover:opacity-80',
+    ]}
+  >
+    {
+      photo ? (
+        <Image
+          src={photo}
+          alt={name}
+          width={80}
+          height={80}
+          class="h-20 w-20 rounded-full object-cover"
+        />
+      ) : (
+        <div class="h-20 w-20 rounded-full bg-line" aria-hidden="true"></div>
+      )
+    }
+    <figcaption class="text-center text-sm">
+      <span class:list={['block', hasPage && 'text-brand-light underline']}>{name}</span>
+      {role && <span class="block text-xs text-muted">{role}</span>}
+    </figcaption>
+  </Tag>
 </figure>
