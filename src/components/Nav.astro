@@ -17,7 +17,14 @@ const items = [
       { label: t('nav.impression'), href: href('/join/impression') },
     ],
   },
-  { label: t('nav.achievements'), href: href('/achievements') },
+  {
+    label: t('nav.achievements'),
+    href: href('/achievements'),
+    children: [
+      { label: t('nav.publications'), href: href('/achievements/publications') },
+      { label: t('nav.awards'), href: href('/achievements/awards') },
+    ]
+  },
 ];
 
 // 現在ページのハイライト判定用（base を除いたパスで比較）
