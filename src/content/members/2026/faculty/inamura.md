@@ -1,6 +1,7 @@
 ---
 name: 稲村 浩
 role: 教授
+photo: ./inamura.jpg
 grade: faculty
 year: 2026
 order: 1
