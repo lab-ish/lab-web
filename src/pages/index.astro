@@ -85,7 +85,7 @@ const { Content: ContactBody } = contact ? await render(contact) : { Content: nu
         contact?.data.contacts?.map((c) => (
           <li class="flex gap-4">
             <span class="w-24 shrink-0">{c.name}</span>
-            <a href={`mailto:${c.email}`} class="text-brand-light underline">
+            <p class="text-brand-light underline">
               {c.email}
             </a>
           </li>

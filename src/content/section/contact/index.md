@@ -3,8 +3,13 @@ title: コンタクト
 updated: 2026-06-30
 lang: ja
 contacts:
-  - name: 稲村
-    email: inamura@
-  - name: 石田
-    email: ish@
+  - name: 稲村 浩
+    email: あいえぬえーえむゆーあーるえー @fun.ac.jp
+  - name: 石田 繁巳
+    email: あいえすえいち @fun.ac.jp
 ---
+
+〒041-8655 北海道函館市亀田中野町116-2 公立はこだて未来大学<br>
+システム情報科学部 情報アーキテクチャ学科
+
+※メールアドレスのひらがなはすべて英小文字に置き換えてください。

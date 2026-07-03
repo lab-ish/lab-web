@@ -3,14 +3,15 @@ title: 研究環境
 updated: 2026-06-30
 lang: ja
 cards:
-  - title: 研究スペース
-    body: （ダミー）学生1人ひとりにデスクとディスプレイを用意している。
-  - title: 全体ゼミ
-    body: （ダミー）週1回、研究室全体で進捗共有とディスカッションを行う。
-  - title: ネットワークゼミ
-    body: （ダミー）ネットワーク系テーマの輪講・議論を行う。
-  - title: センシングゼミ
-    body: （ダミー）センシング系テーマの輪講・議論を行う。
+  - title: 卒研スペース
+    body: フリーアドレスで、デスクとディスプレイを用意している。
+    photo: img/environment/lab_desk.JPG
+  - title: 卒研スペースロッカー
+    body: フリーアドレスとするため、くつろぎコーナーに学生1人ひとりのロッカーを用意している。
+    photo: img/environment/lab_shelf.JPG
+  - title: 3Dプリンタ
+    body: Bambu Lab H2Sを導入。センサデバイスの箱などは3Dプリンタで作成できる。
+    photo: img/environment/3d-printer.JPG
 ---
 
 （ダミー）研究環境ページの本文。研究スペースや機材を写真付きカードで紹介する。
