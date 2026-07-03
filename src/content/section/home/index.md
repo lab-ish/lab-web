@@ -2,6 +2,8 @@
 title: 稲村・石田研究室
 updated: 2026-07-01
 lang: ja
+photo: ./top.jpg
+photo-sm: ./top2.jpg
 ---
 
 公立はこだて未来大学 稲村・石田研究室では、モバイル・セキュリティとIoTセンシングに関する研究を主に行っています。
