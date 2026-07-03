@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import NewsList from '../components/NewsList.astro';
 import { getCollection, getEntry, render } from 'astro:content';
+import { getImage } from 'astro:assets';
 import { href } from '../lib/url';
 import { useTranslations, getLangFromUrl } from '../i18n/utils';
 
@@ -19,17 +20,37 @@ const contact = await getEntry('section', 'contact');
 // 研究室紹介・コンタクトの本文（Markdown）を描画する。
 const home = await getEntry('section', 'home');
 const { Content: HomeBody } = home ? await render(home) : { Content: null };
+
+// ヒーロー画像。photo=PC用 / photo-sm=スマホ用（ハンバーガー切替の md=768px を境に出し分け）。
+const heroLg = home?.data.photo
+  ? await getImage({ src: home.data.photo, format: 'webp', width: 1600 })
+  : null;
+const heroSm = home?.data['photo-sm']
+  ? await getImage({ src: home.data['photo-sm'], format: 'webp', width: 800 })
+  : null;
 const { Content: ContactBody } = contact ? await render(contact) : { Content: null };
 ---
 
 <BaseLayout>
-  {/* ヒーロー（写真プレースホルダ） */}
+  {/* ヒーロー（md=768px 以上で photo、未満で photo-sm） */}
   <section class="mb-12">
-    <div
-      class="flex aspect-[16/7] w-full items-center justify-center rounded bg-line text-muted"
-    >
-      写真
-    </div>
+    {
+      heroLg ? (
+        <picture>
+          <source media="(min-width: 768px)" srcset={heroLg.src} />
+          <img
+            src={(heroSm ?? heroLg).src}
+            alt={home?.data.title}
+            class="aspect-[16/7] w-full rounded object-cover"
+            loading="eager"
+          />
+        </picture>
+      ) : (
+        <div class="flex aspect-[16/7] w-full items-center justify-center rounded bg-line text-muted">
+          写真
+        </div>
+      )
+    }
   </section>
 
   {/* 研究室紹介 */}
