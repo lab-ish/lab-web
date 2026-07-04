@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 /* サイト共通のデザイントークン（Tailwind v4 @theme）。
    配色はワイヤーフレーム確認後に確定する。現状は暫定値。
@@ -22,4 +23,21 @@ body {
   font-family: var(--font-sans);
   color: var(--color-ink);
   line-height: 1.8;
+}
+
+/* Markdown 本文（<Content /> ラッパの .prose）をサイトのブランド配色に合わせる。
+   prose は Content ラッパにのみ付与し、他の UI へは波及させない。 */
+.prose {
+  --tw-prose-body: var(--color-ink);
+  --tw-prose-headings: var(--color-brand);
+  --tw-prose-links: var(--color-brand-light);
+  --tw-prose-bold: var(--color-ink);
+  --tw-prose-bullets: var(--color-line);
+  --tw-prose-hr: var(--color-line);
+  --tw-prose-quotes: var(--color-muted);
+  --tw-prose-quote-borders: var(--color-line);
+  --tw-prose-captions: var(--color-muted);
+  --tw-prose-code: var(--color-ink);
+  --tw-prose-th-borders: var(--color-line);
+  --tw-prose-td-borders: var(--color-line);
 }
