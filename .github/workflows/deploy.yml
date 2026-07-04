@@ -1,5 +1,5 @@
 # GitHub Pages へのビルド・デプロイ。
-# リポジトリのルート（= この 20_src の中身）に package.json がある前提。
+# リポジトリのルートに package.json がある前提。
 # 公式の withastro/action を使う。Node は開発環境（node:24-alpine）に合わせて 24 を指定。
 name: Deploy to GitHub Pages
 
@@ -13,10 +13,10 @@ permissions:
   pages: write
   id-token: write
 
-# 同時実行を1本に制限（進行中のデプロイは止めない）
+# 同時実行を1本に制限（進行中のデプロイは止める）
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
