@@ -411,6 +411,18 @@
         "items": [
             {
                 "lang": "ja",
+                "year": 2026,
+                "month": 6,
+                "authors": "稲村 浩",
+                "title": "(招待講演) AIとIoTがもたらす大規模化と可用性の課題について",
+                "in": "情報処理学会マルチメディア, 分散, 協調とモバイルシンポジウム（DICOMO2026）",
+                "vol_pp": "1F-1, p.1",
+                "url": null,
+                "pdf": "inamura26-ipsj_dicomo",
+                "note": null
+            },
+            {
+                "lang": "ja",
                 "year": 2025,
                 "month": 7,
                 "authors": "石田 繁巳",
