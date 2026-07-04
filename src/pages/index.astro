@@ -12,7 +12,7 @@ const t = useTranslations(lang);
 const allNews = (await getCollection('news')).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime(),
 );
-const latestNews = allNews.slice(0, 3);
+const latestNews = allNews.slice(0, 5);
 
 const links = await getEntry('section', 'links');
 const contact = await getEntry('section', 'contact');
@@ -64,7 +64,7 @@ const { Content: ContactBody } = contact ? await render(contact) : { Content: nu
     )
   }
 
-  {/* ニュース（最新3件） */}
+  {/* ニュース（最新5件） */}
   <section class="mb-12">
     <h2 class="mb-4 text-xl font-bold text-brand">{t('home.news')}</h2>
     <NewsList items={latestNews} />
