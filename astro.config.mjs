@@ -8,8 +8,8 @@ import tailwindcss from '@tailwindcss/vite';
 // （ユーザー/組織ページなら base 不要）。
 // 内部リンク・画像は import.meta.env.BASE_URL 経由とし、相対参照しない。
 export default defineConfig({
-  site: 'https://pman0214.github.io',
-  base: '/lab-web',
+  site: 'https://lab-ish.com',
+  base: '',
 
   i18n: {
     defaultLocale: 'ja',
