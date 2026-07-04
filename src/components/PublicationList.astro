@@ -27,12 +27,13 @@ const t = useTranslations(lang);
                   {item.emph}
                 </span>
               )}
-              <span>{item.authors}, </span>
-              <span class="font-medium">“{item.title},” </span>
-              <span class="italic">{item.in}</span>
-              {item.vol_pp && <span>, {item.vol_pp}</span>}
-              <span>, {monthEncoder(item.month)} {item.year}.</span>
-              {item.note && <span class="ml-1 text-xs text-muted">({item.note})</span>}
+              <span>{item.authors},</span>
+              <span class="font-medium">“{item.title},”</span>
+              <span class="italic">{item.in}</span>{
+                item.vol_pp && <span>, {item.vol_pp}</span>
+              }<span>, {monthEncoder(item.month)} {item.year}.</span>{
+                item.note && <span class="ml-1 text-xs text-muted">({item.note})</span>
+              }
               <span class="ml-1 inline-flex flex-wrap gap-2 align-baseline">
                 {item.url && (
                   <a href={item.url} class="text-brand-light underline" target="_blank" rel="noopener">
@@ -40,7 +41,7 @@ const t = useTranslations(lang);
                   </a>
                 )}
                 {item.pdf && (
-                  <a href={href(`/pdf/${item.pdf}.pdf`)} class="text-brand-light underline">
+                  <a href={href(`/pdf/${item.pdf}.pdf`)} class="text-brand-light underline" target="_blank">
                     PDF
                   </a>
                 )}
