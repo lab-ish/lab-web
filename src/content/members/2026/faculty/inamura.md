@@ -1,5 +1,6 @@
 ---
 name: 稲村 浩
+name-en: Hiroshi INAMURA
 role: 教授
 photo: ./inamura.jpg
 grade: faculty
@@ -7,8 +8,6 @@ year: 2026
 order: 1
 lang: ja
 ---
-
-# 稲村 浩 / Hiroshi INAMURA
 
 ## 経歴
 

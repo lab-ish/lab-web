@@ -17,18 +17,20 @@ export const getStaticPaths = (async () => {
 const { entry } = Astro.props as { entry: CollectionEntry<'members'> };
 const { Content } = await render(entry);
 const { name, role, photo } = entry.data;
+const name_en = entry.data['name-en'];
+const long_name = name_en ? `${name} / ${name_en}` : name;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<BaseLayout title={name} heading={name}>
+<BaseLayout title={long_name} heading={long_name}>
   <article>
     <div class="mb-6 flex items-center gap-4">
       {
         photo ? (
           <Image
             src={photo}
-            alt={name}
+            alt={long_name}
             width={96}
             height={96}
             class="h-24 w-24 rounded-full object-cover border-1 border-line"

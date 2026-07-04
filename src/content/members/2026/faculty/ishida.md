@@ -1,5 +1,6 @@
 ---
 name: 石田 繁巳
+name-en: Shigemi ISHIDA
 role: 准教授
 photo: ./ishida.jpg
 grade: faculty
@@ -7,9 +8,6 @@ year: 2026
 order: 2
 lang: ja
 ---
-
-# 石田 繁巳 / Shigemi ISHIDA
-
 
 ## 経歴
 

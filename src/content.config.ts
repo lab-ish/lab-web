@@ -55,6 +55,7 @@ const members = defineCollection({
   schema: ({ image }) =>
     z.object({
       name: z.string(),
+      'name-en': z.string().optional(), // 英語表記（名＋姓の順）
       role: z.string().optional(), // 教員の役職など
       grade: z.enum(['faculty', 'd', 'm2', 'm1', 'b4']),
       year: z.number().default(2024), // 年度
