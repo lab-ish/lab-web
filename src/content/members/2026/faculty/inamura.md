@@ -1,5 +1,6 @@
 ---
 name: 稲村 浩
+name-en: Hiroshi INAMURA
 role: 教授
 photo: ./inamura.jpg
 grade: faculty
