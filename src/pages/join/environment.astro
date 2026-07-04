@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getEntry } from 'astro:content';
+import { Image } from 'astro:assets';
 
 const entry = await getEntry('section', 'environment');
 const data = entry?.data;
@@ -12,9 +13,17 @@ const cards = data?.cards ?? [];
     {
       cards.map((c) => (
         <article>
-          <div class="mb-2 flex aspect-[16/10] items-center justify-center rounded bg-line text-xs text-muted">
-            画像
-          </div>
+          {c.photo ? (
+            <Image
+              src={c.photo}
+              alt={c.title}
+              class="mb-2 aspect-[16/10] w-full rounded object-cover"
+            />
+          ) : (
+            <div class="mb-2 flex aspect-[16/10] items-center justify-center rounded bg-line text-xs text-muted">
+              画像
+            </div>
+          )}
           <h2 class="text-center text-sm font-medium">{c.title}</h2>
           {c.body && <p class="mt-1 text-center text-xs text-muted">{c.body}</p>}
         </article>

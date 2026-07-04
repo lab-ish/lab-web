@@ -22,6 +22,9 @@ const section = defineCollection({
       title: z.string(),
       updated: z.coerce.date().optional(), // 各ページ右上の「更新日」
       lang: z.enum(['ja', 'en']).default('ja'),
+      // ヒーロー画像（トップページ）。photo=PC用 / photo-sm=スマホ用（ハンバーガー切替時）
+      photo: image().optional(),
+      'photo-sm': image().optional(),
       // 小見出し付きの本文ブロック（研究概要・配属案内など）
       sections: z
         .array(z.object({ heading: z.string().optional(), body: z.string() }))
@@ -31,7 +34,7 @@ const section = defineCollection({
         .array(
           z.object({
             title: z.string(),
-            image: image().optional(),
+            photo: image().optional(),
             body: z.string().optional(),
             group: z.string().optional(),
           }),
@@ -81,7 +84,7 @@ const research = defineCollection({
       title: z.string(),
       group: z.string().optional(), // 稲村研／石田研
       order: z.number().default(99), // group 内の表示順
-      image: image().optional(),
+      photo: image().optional(),
       body: z.string().optional(), // カードの短い説明
       lang: z.enum(['ja', 'en']).default('ja'),
     }),
