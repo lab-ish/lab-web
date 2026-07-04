@@ -42,8 +42,6 @@ const section = defineCollection({
         .optional(),
       // 学生の声（Q&A）
       qa: z.array(z.object({ q: z.string(), a: z.string() })).optional(),
-      // 研究室生活（月別スケジュール）
-      schedule: z.array(z.object({ month: z.string(), body: z.string() })).optional(),
       // 関連サイト
       links: z.array(z.object({ label: z.string(), url: z.url() })).optional(),
       // コンタクト

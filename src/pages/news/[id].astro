@@ -24,7 +24,7 @@ const fmt = (d: Date) =>
 <BaseLayout title={entry.data.title} heading={entry.data.title}>
   <article>
     <p class="mb-6 text-sm text-muted">{fmt(entry.data.date)}</p>
-    <div class="text-sm leading-relaxed [&_p]:mb-4">
+    <div class="prose prose-sm max-w-none">
       <Content />
     </div>
   </article>

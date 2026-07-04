@@ -1,10 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getEntry, getCollection } from 'astro:content';
+import { getEntry, getCollection, render } from 'astro:content';
 import { Image } from 'astro:assets';
 
 const entry = await getEntry('section', 'research');
 const data = entry?.data;
+const { Content } = entry ? await render(entry) : { Content: null };
 
 // 研究紹介カードは collection（1カード = 1ファイル）から取得し、
 // group（稲村研／石田研）ごとに束ねて order 順に並べる。
@@ -18,16 +19,13 @@ const groups = [...new Set(cards.map((c) => c.group ?? ''))];
   {/* 研究概要 */}
   <section class="mb-12">
     <h2 class="mb-4 border-b border-line pb-1 text-lg text-ink">研究概要</h2>
-    <div class="space-y-4">
-      {
-        data?.sections?.map((s) => (
-          <div>
-            {s.heading && <h3 class="font-semibold text-brand">{s.heading}</h3>}
-            <p class="text-sm">{s.body}</p>
-          </div>
-        ))
-      }
-    </div>
+    {
+      Content && (
+        <div class="prose prose-sm max-w-none">
+          <Content />
+        </div>
+      )
+    }
   </section>
 
   {/* 研究紹介 */}
