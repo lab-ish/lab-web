@@ -6,3 +6,5 @@ lang: ja
 
 M2 井戸さんが DICOMO 2026でヤングリサーチャー賞を受賞しました。
 おめでとうございます！
+
+![2026-06-26-dicomo-award](2026-06-26-dicomo-award.png)
