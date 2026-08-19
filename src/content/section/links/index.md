@@ -1,6 +1,6 @@
 ---
 title: 関連サイト
-updated: 2026-07-04
+updated: 2026-08-19
 lang: ja
 links:
   - label: 公立はこだて未来大学
@@ -8,5 +8,5 @@ links:
   - label: Shigemi ISHIDA's Portfolio
     url: https://pman0214.netlify.app/
   - label: JST CRONOS横田プロジェクト
-    url: https://yokota-cronos.github.io/
+    url: https://yokota-cronos.com/
 ---
