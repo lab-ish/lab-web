@@ -6,6 +6,30 @@
             {
                 "lang": null,
                 "year": 2026,
+                "month": 8,
+                "authors": "R. Takahashi, L. Yifan, M. Fukumoto, A. Noda, S. Ishida, T. Yokota, T. Someya, and Y. Kawahara",
+                "title": "Ultra-Low-Power Wireless Ring Mouse",
+                "in": "Translated IEEJ Trans. Sensors and Micromachines (Denki Gakkai Ronbunshi E)",
+                "vol_pp": "vol.146, no.7, pp.186-192",
+                "url": "https://doi.org/10.1002/ecj.70049",
+                "pdf": null,
+                "note": "Translated article of https://doi.org/10.1541/ieejsmas.146.186"
+            },
+            {
+                "lang": "ja",
+                "year": 2026,
+                "month": 7,
+                "authors": "高橋 亮, Li Yifan, 福本 雅朗, 野田 聡人, 石田 繁巳, 横田 知之, 染谷 隆夫, 川原 圭博",
+                "title": "picoRing mouse：極低電力な指輪型無線マウス",
+                "in": "電気学会論文誌E（センサ・マイクロマシン部門誌）",
+                "vol_pp": "vol.146, no.7, pp.186-192",
+                "url": "https://doi.org/10.1541/ieejsmas.146.186",
+                "pdf": null,
+                "note": null
+            },
+            {
+                "lang": null,
+                "year": 2026,
                 "month": 4,
                 "authors": "M. Arita, Y. Nakamura, S. Ishida, and Y. Arakawa",
                 "title": "ZEL+: Wearable Net-Zero-Energy Lifelogging Using Heterogeneous Energy Harvesters for Sustainable Context Sensing",
@@ -412,6 +436,31 @@
             {
                 "lang": "ja",
                 "year": 2026,
+                "month": 9,
+                "authors": "石田 繁巳",
+                "title": "セマンティック通信を見据えたマルチスケールセンシングと学習の融合によるデジタルツイン基盤",
+                "in": "電子情報通信学会ソサイエティ大会",
+                "vol_pp": "ABT-1-04, pp.1-4",
+                "url": "https://pub.confit.atlas.jp/ja/event/society2026/session/AlxKIC6x",
+                "pdf": null,
+                "note": "will appear",
+                "slide": null
+            },
+            {
+                "lang": "en",
+                "year": 2026,
+                "month": 8,
+                "authors": "H. Inamura",
+                "title": "[Keynote] Availability Challenges in Large-Scale Network Systems",
+                "in": "NaNA2026, Macau, China",
+                "vol_pp": null,
+                "url": null,
+                "pdf": null,
+                "note": null
+            },
+            {
+                "lang": "ja",
+                "year": 2026,
                 "month": 6,
                 "authors": "稲村 浩",
                 "title": "[招待講演] AIとIoTがもたらす大規模化と可用性の課題について",
@@ -510,6 +559,20 @@
         "title": "Conference",
         "position": 30,
         "items": [
+            {
+                "lang": null,
+                "year": 2026,
+                "month": 10,
+                "authors": "S. Ido, K. Tanaka, R. Maeda, R. Takahashi, A. Noda, and S. Ishida",
+                "title": "Collisionless Multi-Tag NFC Sensing for Indoor Activity Recognition Using Meander E-Textiles",
+                "in": "Companion of the 2026 ACM International Joint Conference on Pervasive and Ubiquitous Computing (Ubicomp Companion ‘26), Shanghai, China",
+                "vol_pp": null,
+                "url": null,
+                "pdf": "ido26_ubicomp-isw",
+                "note": "open access, will appear, first three authors contributed equally",
+                "emph": null,
+                "slide": null
+            },
             {
                 "lang": null,
                 "year": 2025,
