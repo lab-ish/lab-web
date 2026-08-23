@@ -562,6 +562,19 @@
             {
                 "lang": null,
                 "year": 2026,
+                "month": 8,
+                "authors": "T. Kodama, H. Inamura, and S. Ishida",
+                "title": "Low-rate DoS Attack Mitigation Using PEP",
+                "in": "International Workshop on Informatics (IWIN), Da Nang, Vietnam",
+                "url": "http://www.infsoc.org/conference/iwin2026/program",
+                "pdf": null,
+                "note": "will appear",
+                "emph": null,
+                "slide": null
+            },
+            {
+                "lang": null,
+                "year": 2026,
                 "month": 10,
                 "authors": "S. Ido, K. Tanaka, R. Maeda, R. Takahashi, A. Noda, and S. Ishida",
                 "title": "Collisionless Multi-Tag NFC Sensing for Indoor Activity Recognition Using Meander E-Textiles",
