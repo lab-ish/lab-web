@@ -9,3 +9,5 @@ lang: ja
 ## 論文情報
 
 - T. Kodama, H. Inamura, and S. Ishida, “Low-rate DoS Attack Mitigation Using PEP,” International Workshop on Informatics (IWIN), Da Nang, Vietnam, Aug 2026.
+
+![2026-09-10-iwin-award](2026-09-10-iwin-award.jpg)
