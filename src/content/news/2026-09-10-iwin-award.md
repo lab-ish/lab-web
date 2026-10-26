@@ -1,5 +1,5 @@
 ---
-title: IWIN2026にて稲村教授らの発表論文がExcellent Paper Award受賞
+title: IWIN2026にて稲村教授らの論文がExcellent Paper Award受賞
 date: 2026-09-10
 lang: ja
 ---
