@@ -442,8 +442,8 @@
                 "in": "電子情報通信学会ソサイエティ大会",
                 "vol_pp": "ABT-1-04, pp.1-4",
                 "url": "https://pub.confit.atlas.jp/ja/event/society2026/session/AlxKIC6x",
-                "pdf": null,
-                "note": "will appear",
+                "pdf": "ishida26-ieice_sotai",
+                "note": null,
                 "slide": null
             },
             {
@@ -562,14 +562,27 @@
             {
                 "lang": null,
                 "year": 2026,
-                "month": 8,
-                "authors": "T. Kodama, H. Inamura, and S. Ishida",
-                "title": "Low-rate DoS Attack Mitigation Using PEP",
-                "in": "International Workshop on Informatics (IWIN), Da Nang, Vietnam",
-                "url": "http://www.infsoc.org/conference/iwin2026/program",
-                "pdf": null,
+                "month": 10,
+                "authors": "R. Higuchi, H. Inamura, and S. Ishida",
+                "title": "Data Recovery via Memory Forensics Using System Call Monitoring",
+                "in": "IEEE Global Conference on Consumer Electronics (GCCE), Kobe, Japan",
+                "vol_pp": null,
+                "url": null,
+                "pdf": "higuchi26_ieee-gcce",
                 "note": "will appear",
-                "emph": null,
+                "slide": null
+            },
+            {
+                "lang": null,
+                "year": 2026,
+                "month": 10,
+                "authors": "S. Ido, S. Ishida, and H. Inamura",
+                "title": "Jump-Rope Technique Classification and Counting: A Technique-Independent Jump Segmentation Approach",
+                "in": "IEEE Global Conference on Consumer Electronics (GCCE), Kobe, Japan",
+                "vol_pp": null,
+                "url": null,
+                "pdf": "ido26_ieee-gcce",
+                "note": "will appear",
                 "slide": null
             },
             {
@@ -578,12 +591,25 @@
                 "month": 10,
                 "authors": "S. Ido, K. Tanaka, R. Maeda, R. Takahashi, A. Noda, and S. Ishida",
                 "title": "Collisionless Multi-Tag NFC Sensing for Indoor Activity Recognition Using Meander E-Textiles",
-                "in": "Companion of the 2026 ACM International Joint Conference on Pervasive and Ubiquitous Computing (Ubicomp Companion ‘26), Shanghai, China",
+                "in": "Companion of the 2026 ACM International Joint Conference on Pervasive and Ubiquitous Computing (Ubicomp Companion '26), Shanghai, China",
                 "vol_pp": null,
-                "url": null,
+                "url": "https://doi.org/10.1145/3798063.3839219",
                 "pdf": "ido26_ubicomp-isw",
-                "note": "open access, will appear, first three authors contributed equally",
+                "note": "first three authors contributed equally, open access",
                 "emph": null,
+                "slide": null
+            },
+            {
+                "lang": null,
+                "year": 2026,
+                "month": 8,
+                "authors": "T. Kodama, H. Inamura, and S. Ishida",
+                "title": "Low-rate DoS Attack Mitigation Using PEP",
+                "in": "International Workshop on Informatics (IWIN), Da Nang, Vietnam",
+                "url": "http://www.infsoc.org/conference/iwin2026/program",
+                "pdf": null,
+                "note": null,
+                "emph": "Excellent Paper Award",
                 "slide": null
             },
             {
@@ -1546,10 +1572,10 @@
                 "title": "LLMステガノグラフィの流暢性向上に向けた基礎的検討",
                 "in": "情報処理学会マルチメディア, 分散, 協調とモバイルシンポジウム（DICOMO2026）",
                 "vol_pp": "7F-3, pp.1969-1976",
-                "url": null,
+                "url": "https://ipsj.ixsq.nii.ac.jp/records/2011680",
                 "pdf": "ido26-ipsj_dicomo",
                 "note": null,
-                "emph": "ヤングリサーチャー賞"
+                "emph": "ヤングリサーチャー賞, 優秀論文賞"
             },
             {
                 "lang": "ja",
@@ -1559,7 +1585,7 @@
                 "title": "異種マルウェア混入によるIoTマルウェア画像分類への標的型攻撃の検討",
                 "in": "情報処理学会マルチメディア, 分散, 協調とモバイルシンポジウム（DICOMO2026）",
                 "vol_pp": "3D-2, pp.739-746",
-                "url": null,
+                "url": "https://ipsj.ixsq.nii.ac.jp/records/2011534",
                 "pdf": "kawata26-ipsj_dicomo",
                 "note": null,
                 "emph": null
@@ -2708,7 +2734,8 @@
                 "url": "http://id.nii.ac.jp/1001/00194451/",
                 "pdf": "kubo19-ipsj_its",
                 "note": null,
-                "slide": null
+                "slide": null,
+                "emph": "優秀論文賞"
             },
             {
                 "lang": "ja",
